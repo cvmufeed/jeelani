@@ -57,3 +57,5 @@ Route::post('/address/delete', 'AddressController@delete');
 Route::patch('/address/edit/', 'AddressController@update');
 
 Route::get('/search', 'AddressController@search');
+
+Route::get('/print', 'PrintController@index');
