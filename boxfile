@@ -1,0 +1,50 @@
+web1:
+  php_extensions:
+    - json
+    - mbstring
+    - mcrypt
+    - tokenizer
+    - pdo_mysql
+    - xcache
+    - redis
+    - mysqli
+    - mysql
+  httpd_document_root: public
+  network_dirs:
+    - storage/framework
+    - storage/app
+  before_deploy:
+    - 'mkdir storage/framework/views'
+  log_watch:
+    laravel[error]: 'storage/logs/laravel.log'
+  nonpersistent_writable_dirs:
+    - storage/cache
+global:
+  env:
+    - APP_ENV: production
+    - APP_DEBUG: false
+    - APP_KEY: base64:51nZjPREftOrnQVpIqI2mjtwo9z1A8rO+fRUtbYnCm4=
+    - DB_HOST: 'MAP:DATABASE1_HOST'
+    - DB_DATABASE: 'MAP:DATABASE1_NAME'
+    - DB_USERNAME: 'MAP:DATABASE1_USER'
+    - DB_PASSWORD: 'MAP:DATABASE1_PASS'
+    - CACHE_DRIVER: file
+    - SESSION_DRIVER: redis
+    - QUEUE_DRIVER: redis
+    - MAIL_DRIVER: mail
+worker1:
+  exec: 'php artisan queue:listen'
+  php_extensions:
+    - json
+    - mbstring
+    - mcrypt
+    - tokenizer
+    - xcache
+    - redis
+  network_dirs:
+    - storage/framework
+    - storage/app
+  nonpersistent_writable_dirs:
+    - storage/cache
+  log_watch:
+    laravel[error]: 'storage/logs/laravel.log 
