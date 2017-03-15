@@ -89,12 +89,6 @@ class AddressController extends Controller
         $address->state_id = $district->state_id;
         $address->user_id = Auth::id();
         $address->save();
-        $subscription = new Subscription;
-        $subscription->start = ''.floor($request->startYear%100)*100+$request->startMonth;
-        $subscription->end = ''.floor($request->endYear%100)*100+$request->endMonth;
-        $subscription->address_id = $address->id;
-        $subscription->user_id = Auth::id();
-        $subscription->save();
         return back();
     }
 

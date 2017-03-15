@@ -14,7 +14,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-        
+    <link rel="stylesheet" href="/css/tooltip.css">
     @yield('header')
     <style>
         body {
@@ -69,6 +69,10 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="\profile\{{Auth::id()}}">Profile</a></li>
+                                @if (Auth::user()->type == 'superadmin')
+                                    <li><a href="\add-user">Add User</a></li>
+                                    <li><a href="\edit-users">Edit Users</a></li>
+                                @endif
                                 <li><a href="\change-password">Change Password</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>

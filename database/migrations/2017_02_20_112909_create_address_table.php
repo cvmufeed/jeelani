@@ -22,6 +22,10 @@ class CreateAddressTable extends Migration
             $table->integer('district_id')->unsigned();
             $table->integer('state_id')->unsigned();
             $table->integer('user_id')->unsigned()->index();
+            $table->integer('start_month');
+            $table->integer('start_year');
+            $table->integer('end_month');
+            $table->integer('end_year');
             $table->timestamps();
         });
     }

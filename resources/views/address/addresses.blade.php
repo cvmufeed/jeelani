@@ -1,6 +1,8 @@
 @extends ('layouts.address')
 @section ('address_content')
-
+<br/><br/>
+/{{$district->state->name}}/{{$district->name}}<br/>
+<a href="/state/{{$district->state->id}}" class="btn btn-primary">Go Back</a>
 <script>
 function deleteNow(value) {
 	document.getElementById('deleteValue').value = value;
@@ -13,11 +15,22 @@ function editNow(value) {
 	form.elements['phone'].value = document.getElementById('phone_'+value).innerHTML;
 	form.elements['pin'].value = document.getElementById('pin_'+value).innerHTML;
 	form.elements['id'].value = value;
+	form.elements['start_month'].value = document.getElementById('start_month_'+value).value;
+	form.elements['start_year'].value = document.getElementById('start_year_'+value).value;
+	form.elements['end_month'].value = document.getElementById('end_month_'+value).value;
+	form.elements['end_year'].value = document.getElementById('end_year_'+value).value;
+}
+function add_now() {
+	document.getElementById('modal_title').innerHTML = 'Add Address';
+	document.getElementById('modal_submit').innerHTML = 'Add Address';
+	document.getElementById('edit_form').action = '/district/{{ $district->id }}/add-address';
+	document.getElementById('edit_form').elements['_method'].value = 'post';
 }
 </script>
 
-	<h1>All Addresses</h1>
-	<a href = "/add/address" class="btn btn-primary">&nbsp;&nbsp;Add Address&nbsp;&nbsp;</a>
+	<h1>All Addresses in {{$district->name}}({{$district->addresses->count()}})</h1>
+	<a href="#editModal" data-toggle="modal" class="btn btn-primary" onclick="add_now()">&nbsp;&nbsp;Add Address&nbsp;&nbsp;</a>
+	<br/><br/>
 	<ul class="list-group">
 	    @foreach ($address as $value)
 	    	<div class="list-group-item">
@@ -30,8 +43,8 @@ function editNow(value) {
 		        <div id="state_{{$value->id}}">{{$value->state->name}}</div>
 		        Phone: <span id="phone_{{$value->id}}">{{$value->phone}}</span><br/>
 		        Pin: <span id="pin_{{$value->id}}">{{$value->pin}}</span><br/>
-		        From: {{$month[$value->subscription[0]->startMonth]}}-{{$value->subscription[0]->startYear}}
-		        To: {{$month[$value->subscription[0]->endMonth]}}-{{$value->subscription[0]->endYear}}
+		        From: {{$month[$value->start_month]}}-{{$value->start_year}}<input type="hidden" id="start_month_{{$value->id}}" value="{{$value->start_month}}"><input type="hidden" id="start_year_{{$value->id}}" value="{{$value->start_year}}">
+		        To: {{$month[$value->end_month]}}-{{$value->end_year}}<input type="hidden" id="end_month_{{$value->id}}" value="{{$value->end_month}}"><input type="hidden" id="end_year_{{$value->id}}" value="{{$value->end_year}}">
 		        <a href="#editModal" data-toggle="modal" onclick="editNow({{$value->id}})">edit</a>&nbsp;&nbsp;
 		        <a href="#deleteModal" data-toggle="modal" onclick="deleteNow({{$value->id}})">delete</a>
 	        </div>
@@ -49,8 +62,8 @@ function editNow(value) {
 	    	Phone:<input type="text" class="form-control" name="phone" placeholder="Enter Phone number">
 	    	<br/>
 	    	*Mandatory<br/>
-	    	Subscription Starts : {{ Form::selectMonth('startMonth',$currentMonth, array('onChange' => 'dateRangeSelect()', 'id' => 'month1')) }} {{ Form::selectRange('startYear', $currentYear-1, $currentYear+6, $currentYear, array('onChange' => 'dateRangeSelect()', 'id' => 'year1')) }}&nbsp;&nbsp;&nbsp;&nbsp;
-	    	Subscription Ends : {{ Form::selectMonth('endMonth',$endMonth, array('id' => 'month2')) }} {{ Form::selectRange('endYear', $currentYear, $currentYear+5, $currentYear+1, array('id' => 'year2')) }}
+	    	Subscription Starts : {{ Form::selectMonth('start_month',$currentMonth, array('onChange' => 'dateRangeSelect()', 'id' => 'month1')) }} {{ Form::selectRange('start_year', $currentYear-1, $currentYear+6, $currentYear, array('onChange' => 'dateRangeSelect()', 'id' => 'year1')) }}&nbsp;&nbsp;&nbsp;&nbsp;
+	    	Subscription Ends : {{ Form::selectMonth('end_month',$endMonth, array('id' => 'month2')) }} {{ Form::selectRange('end_year', $currentYear, $currentYear+5, $currentYear+1, array('id' => 'year2')) }}
 	    </div>
 	    <div class="form-group">
 	        <button type="submit" class = "btn btn-primary">Add Address</submit>
@@ -99,7 +112,7 @@ function editNow(value) {
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Edit Address</h4>
+	          <h4 class="modal-title" id="modal_title">Edit Address</h4>
 	        </div>
 	        <div class="modal-body">
 				<form method="POST" action="/address/edit" id="edit_form">
@@ -114,11 +127,11 @@ function editNow(value) {
 				    	<br/>
 				    	<input type="hidden" name="id" value="">
 				    	*Mandatory<br/>
-				    	Subscription Starts : {{ Form::selectMonth('startMonth',$currentMonth, array('onChange' => 'dateRangeSelect()', 'id' => 'month1')) }} {{ Form::selectRange('startYear', $currentYear-1, $currentYear+6, $currentYear, array('onChange' => 'dateRangeSelect()', 'id' => 'year1')) }}&nbsp;&nbsp;&nbsp;&nbsp;
-				    	Subscription Ends : {{ Form::selectMonth('endMonth',$endMonth, array('id' => 'month2')) }} {{ Form::selectRange('endYear', $currentYear, $currentYear+5, $currentYear+1, array('id' => 'year2')) }}
+				    	Subscription Starts : {{ Form::selectMonth('start_month',$currentMonth, array('onChange' => 'dateRangeSelect()', 'id' => 'month1')) }} {{ Form::selectRange('start_year', $currentYear-1, $currentYear+6, $currentYear, array('onChange' => 'dateRangeSelect()', 'id' => 'year1')) }}&nbsp;&nbsp;&nbsp;&nbsp;
+				    	Subscription Ends : {{ Form::selectMonth('end_month',$endMonth, array('id' => 'month2')) }} {{ Form::selectRange('end_year', $currentYear, $currentYear+5, $currentYear+1, array('id' => 'year2')) }}
 				    </div>
 				    <div class="form-group">
-				        <button type="submit" class = "btn btn-primary">Update</submit>
+				        <button type="submit" class = "btn btn-primary" id="modal_submit">Update</submit>
 				    </div>
 				</form>
 	        </div>

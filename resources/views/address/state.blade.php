@@ -1,27 +1,7 @@
 @extends ('layouts.address')
-@section('header')
-<!-- <link rel="stylesheet" href="\css\modal.css">
-<script src="\js\modal.js"></script> -->
-<script>
-    function edit(value) {
-        var district = document.getElementById('edit_content'+value).innerHTML;
-        var edit_string = "<input type='text' value='"+district+"' name='name' form='edit_form'><input type='submit' class = 'btn btn-primary' value='Update' form='edit_form'><a onclick='reload()'>Cancel</a>";
-        document.getElementById('edit'+value).innerHTML = edit_string;
-        document.edit_form_1.action = "/district/"+value;
-    }
-    function delete_district(id,name) {
-        if(confirm('Are you sure you want to delete '+name+'?')) {
-            window.location.replace('/district/'+id+'/delete');
-        }
-    }
-    function reload() {
-        location.reload();
-    }
-</script>
-@stop
-
-
 @section ('address_content')
+<br/><br/>
+<a href="/home" class="btn btn-primary">Go Back</a>
 <!-- editing district -->
 <form method="POST" action="" id="edit_form" name="edit_form_1">
             {{ csrf_field() }}
@@ -33,8 +13,8 @@
     @foreach ($state->district as $district)
     <li class="list-group-item"><span id="edit{{ $district->id }}"><a href="/district/{{ $district->id }}/addresses" id="edit_content{{ $district->id }}">{{$district->name}}</a>({{ $district->addresses->count() }})&nbsp;&nbsp;
         <sub class="pull-right">Added By: <a href="\profile\{{$district->user['id']}}">{{$district->user['name']}}</a></sub>
-        <a onclick="edit({{ $district->id }})">edit</a>&nbsp;&nbsp;
-        <a onclick="delete_district({{$district->id}},'{{$district->name}}')">delete</a>
+        <a onclick="edit({{ $district->id }},'district')">edit</a>&nbsp;&nbsp;
+        <a onclick="delete_now({{$district->id}},'{{$district->name}}','district')">delete</a>
         </span>
         </li>
     @endforeach

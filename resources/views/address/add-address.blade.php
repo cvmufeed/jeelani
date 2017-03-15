@@ -13,8 +13,8 @@
 	    	<br/>
 	    	
 	    	*Mandatory<br/>
-	    	Subscription Starts : {{ Form::selectMonth('startMonth',$currentMonth, array('onChange' => 'dateRangeSelect()', 'id' => 'month1')) }} {{ Form::selectRange('startYear', $currentYear-1, $currentYear+6, $currentYear, array('onChange' => 'dateRangeSelect()', 'id' => 'year1')) }}&nbsp;&nbsp;&nbsp;&nbsp;
-	    	Subscription Ends : {{ Form::selectMonth('endMonth',$endMonth, array('id' => 'month2')) }} {{ Form::selectRange('endYear', $currentYear, $currentYear+5, $currentYear+1, array('id' => 'year2')) }}
+	    	Subscription Starts : {{ Form::selectMonth('start_month',$currentMonth, array('onChange' => 'dateRangeSelect()', 'id' => 'month1')) }} {{ Form::selectRange('start_year', $currentYear-1, $currentYear+6, $currentYear, array('onChange' => 'dateRangeSelect()', 'id' => 'year1')) }}&nbsp;&nbsp;&nbsp;&nbsp;
+	    	Subscription Ends : {{ Form::selectMonth('end_month',$endMonth, array('id' => 'month2')) }} {{ Form::selectRange('end_year', $currentYear, $currentYear+5, $currentYear+1, array('id' => 'year2')) }}
 	    </div>
 	    <div class="form-group">
 	        <button type="submit" class = "btn btn-primary">Add Address</submit>

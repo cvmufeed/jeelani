@@ -48,4 +48,9 @@ class StateController extends Controller
     		echo 'Cannot delete state As there are districts under this state. To delete the state delete all the Districts first.';
     	}
     }
+    public function update(Request $request, State $state)
+    {   
+        $state->update($request->all());
+        return back();
+    }
 }

@@ -6,10 +6,10 @@
 	<h1>All States</h1>
 	<ul class="list-group">
 	    @foreach ($state as $value)
-		    <li class="list-group-item"><a href="/state/{{ $value->id }}">{{$value->name}}({{ $value->addresses->count() }})</a>&nbsp;&nbsp;
+		    <li class="list-group-item" id="edit{{$value->id}}"><a href="/state/{{ $value->id }}"><span id="edit_content{{$value->id}}">{{$value->name}}</span>({{ $value->addresses->count() }})</a>&nbsp;&nbsp;
 		        <sub class="pull-right">Added By: <a href="\profile\{{$value->user['id']}}">{{$value->user['name']}}</a></sub>
-		        <a href="/state/{{ $value->id }}/edit">edit</a>&nbsp;&nbsp;
-		        <a href="/state/{{ $value->id }}/delete">delete</a>
+		        <a onclick="edit({{$value->id}},'state')">edit</a>&nbsp;&nbsp;
+		        <a onclick="delete_now({{$value->id}},'{{$value->name}}', 'state')">delete</a>
 	        </li>
 	    @endforeach
 	</ul>
@@ -25,7 +25,10 @@
 	        <button type="submit" class = "btn btn-primary">Add State</submit>
 	    </div>
 	</form>
-
+<form method="POST" action="" id="edit_form" name="edit_form_1">
+            {{ csrf_field() }}
+            {{ method_field('patch') }}
+</form>
 	@if (count($errors))
 	    <ul>
 	        @foreach ($errors->all() as $error)
