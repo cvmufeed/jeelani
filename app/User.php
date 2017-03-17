@@ -14,7 +14,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email'
+        'name', 'email','password'
     ];
     //deleted password from fillable by Mufeed
     /**

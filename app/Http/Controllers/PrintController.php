@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Address;
 use App\State;
 use App\District;
+use App\Option;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -20,11 +21,12 @@ class PrintController extends Controller
 	{
 		return view('address.print');
 	}
-	public function test()
+	public function download()
 	{
 		// instantiate and use the dompdf class
 		$dompdf = new Dompdf();
-		$dompdf->loadHtml('hello world');
+		$address = Address::all();
+		$dompdf->loadHtml(view('address.print-view',compact('address')));
 
 		// (Optional) Setup the paper size and orientation
 		$dompdf->setPaper('A4', 'portrait');
@@ -37,7 +39,8 @@ class PrintController extends Controller
 	}
 	public function all()
 	{
+		$options = Option::all();
 		$address = Address::all();
-		return view('address.print-view',compact('address'));
+		return view('address.print-view',compact('address','options'));
 	}
 }

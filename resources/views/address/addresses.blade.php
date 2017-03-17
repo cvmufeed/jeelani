@@ -1,7 +1,11 @@
 @extends ('layouts.address')
 @section ('address_content')
 <br/><br/>
-/{{$district->state->name}}/{{$district->name}}<br/>
+<ol class="breadcrumb">
+<li><a href="/home"><i class="glyphicon glyphicon-home"></i></a></li>
+<li><a href="/state/{{$district->state->id}}">{{$district->state->name}}</a></li>
+<li class="active">{{$district->name}}</li>
+</ol>
 <a href="/state/{{$district->state->id}}" class="btn btn-primary">Go Back</a>
 <script>
 function deleteNow(value) {
