@@ -10,6 +10,9 @@
 		        <sub class="pull-right">Added By: <a href="\profile\{{$value->user['id']}}">{{$value->user['name']}}</a></sub>
 		        <a onclick="edit({{$value->id}},'state')">edit</a>&nbsp;&nbsp;
 		        <a onclick="delete_now({{$value->id}},'{{$value->name}}', 'state')">delete</a>
+		        <br/>
+		        <a href="/print/state/{{$value->id}}" class="pull-right"><i class="glyphicon glyphicon-print"></i></a>
+		        <br/>
 	        </li>
 	    @endforeach
 	</ul>

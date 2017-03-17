@@ -16,6 +16,9 @@
         <a onclick="edit({{ $district->id }},'district')">edit</a>&nbsp;&nbsp;
         <a onclick="delete_now({{$district->id}},'{{$district->name}}','district')">delete</a>
         </span>
+        <br/>
+        <a href="/print/district/{{$district->id}}" class="pull-right"><i class="glyphicon glyphicon-print"></i></a>
+        <br/>
         </li>
     @endforeach
 </ul>

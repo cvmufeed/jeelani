@@ -43,4 +43,30 @@ class PrintController extends Controller
 		$address = Address::all();
 		return view('address.print-view',compact('address','options'));
 	}
+	public function printAllNow()
+	{
+		$options = Option::all();
+		$address = Address::all();
+		$todo = 'download';
+		return view('print.template',compact('options','address','todo'));
+	}
+	public function printAddress($address)
+	{
+		$id = $address;
+		$address = Address::where('id',$id)->get();
+		$options = Option::all();
+		return view('address.print-view',compact('address','options'));
+	}
+	public function printDistrict($district)
+	{
+		$address = Address::where('district_id',$district)->get();
+		$options = Option::all();
+		return view('address.print-view',compact('address','options'));
+	}
+	public function printState($state)
+	{
+		$address = Address::where('state_id',$state)->get();
+		$options = Option::all();
+		return view('address.print-view',compact('address','options'));
+	}
 }

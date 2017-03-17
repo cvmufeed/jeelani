@@ -1,53 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-        
-    @yield('header')
-    <style>
-        body {
-            font-family: 'Lato';
-        }
-        .page-break {
-            page-break-after: always;
-            width:100%;
-        }
-        .page {
-            border:dashed;
-            height:297mm;
-            width:210mm;
-            
-        }
-        .address {
-            border:1px solid;
-            margin:auto;
-            width:8cm;
-            margin-top: 10cm;
-            
-        }
+<body @if($todo == 'print')
+{{"onload='print_now()'"}}
+@endif>
+<div id="print">
+    <style type="text/css" media="print">
+    @page 
+    {
+        size: auto;   /* auto is the initial value */
+        margin: 0mm;  /* this affects the margin in the printer settings */
+    }
     </style>
-    <script>
-        function print_now() {
-            var prtContent = document.getElementById("print");
-            var WinPrint = window.open('', '', '');
-            WinPrint.document.write(prtContent.innerHTML);
-            WinPrint.document.close();
-            WinPrint.focus();
-            WinPrint.print();
-            WinPrint.close();   
+    <style>
+    .page-break {
+        width:100%;
+    }
+    .address {
+        border:1px solid;
+        margin:auto;
+        font-size: {{$options->where('name','address_font_size')->first()->value}}mm;
+        width:{{$options->where('name','address_width')->first()->value}}mm;
+        margin-top: {{$options->where('name','address_margin_top')->first()->value}}mm;
+        
+    }
+    .page{
+        border:none;
+        height:{{$options->where('name','page_height')->first()->value}}mm;
+        width:{{$options->where('name','page_width')->first()->value}}mm;
+    }
+</style>
+        <?php
+        $months = ['null','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        for($i = 0 ; $i < count($address); $i++) {
+            echo '<div class="page-break"><div class="page" id="page'.$i.'"><div class="address">';
+            echo 'END '.$months[$address[$i]->end_month].'-'.$address[$i]->end_year.'<br/>';
+            echo $address[$i]->name.'    #'.$address[$i]->id.'<br/>';
+            echo nl2br($address[$i]->address).'<br/>';
+            echo $address[$i]->city.'<br/>';
+            echo $address[$i]->district->name.'<br/>';
+            echo $address[$i]->state->name.'<br/>';
+            echo 'PIN:'.$address[$i]->pin.'<br/>';
+            echo 'Phone:'.$address[$i]->phone.'<br/>';
+            echo '</div></div></div>';
+
         }
-    </script>
-</head>
-<body>
+        ?>
+</div>
+</body>

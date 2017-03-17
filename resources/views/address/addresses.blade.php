@@ -51,6 +51,7 @@ function add_now() {
 		        To: {{$month[$value->end_month]}}-{{$value->end_year}}<input type="hidden" id="end_month_{{$value->id}}" value="{{$value->end_month}}"><input type="hidden" id="end_year_{{$value->id}}" value="{{$value->end_year}}">
 		        <a href="#editModal" data-toggle="modal" onclick="editNow({{$value->id}})">edit</a>&nbsp;&nbsp;
 		        <a href="#deleteModal" data-toggle="modal" onclick="deleteNow({{$value->id}})">delete</a>
+		        <a href="/print/address/{{$value->id}}" class="pull-right"><i class="glyphicon glyphicon-print"></i></a>
 	        </div>
 	    @endforeach
 	</ul>

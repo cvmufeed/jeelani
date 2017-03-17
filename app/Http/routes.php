@@ -84,3 +84,7 @@ Route::get('/print', 'PrintController@index');
 Route::get('/print/all', 'PrintController@all');
 Route::get('/print/template', function() {return view('print.template');});
 Route::post('/print/options/edit', 'OptionController@setOptions');
+Route::get('/print/all/now', 'PrintController@printAllNow');
+Route::get('print/address/{address}', 'PrintController@printAddress');
+Route::get('/print/district/{district}', 'PrintController@printDistrict');
+Route::get('/print/state/{state}','PrintController@printState');
