@@ -43,7 +43,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     Jeelani
                 </a>
             </div>
@@ -53,6 +53,8 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/print') }}">Print</a></li>
+                    <li><a href="{{ url('/subscriptions') }}">Subscriptions</a></li>
+                    <li><a href="#searchModal" data-toggle="modal">Search</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -97,5 +99,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+      <div class="modal fade" id="searchModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Search</h4>
+            </div>
+            <div class="modal-body">
+              <form action="/search" method="GET">
+                <input type="text" class="form-control" autocomplete="off" name="addressee" placeholder="Enter number or name...">
+                <br/>
+                <input type="submit" class="btn btn-primary" value="Submit">
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+  
+    </div>
 </body>
 </html>

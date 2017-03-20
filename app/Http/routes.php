@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -75,6 +74,8 @@ Route::post('/address/delete', 'AddressController@delete');
 Route::get('/address/{address}', 'AddressController@show');
 
 Route::patch('/address/edit/', 'AddressController@update');
+Route::get('/subscriptions','AddressController@subscriptionMainPage');
+Route::get('/subscriptions/{subscription}','AddressController@subscriptionPage');
 
 Route::get('/search', 'AddressController@search');
 

@@ -94,13 +94,29 @@ class AddressController extends Controller
 
     public function search(Request $request)
     {
+        if ($request->addressee == '') {
+            return back();
+        }
         if (is_numeric($request->addressee)) {
-            $address = Address::find($request->addressee);
-            return $address;
+            $address = Address::where('id',$request->addressee)->get();
         }
         else {
-            $address = Address::where('name','like','%'.$request->addressee.'%');
-            return $address->first();          
+            $address = Address::where('name','like','%'.$request->addressee.'%')->get();
         }
+        $month = $this->months;
+        return view('address.address-template',compact('address','month'));
+    }
+    public function subscriptionMainPage()
+    {   $months = $this->months;
+        $subscriptions = Address::select(DB::raw('end_month,end_year,COUNT(*) AS count'))->groupBy(DB::raw('CONCAT(end_month,end_year)'))->orderBy('end_year')->orderBy('end_month')->get();
+        return view('address.subscription',compact('subscriptions','months'));
+    }
+    public function subscriptionPage($subscription)
+    {
+        $year = $subscription%10000;
+        $month = floor($subscription/10000);
+        $address = Address::where([['end_month','=',$month],['end_year','=',$year]])->get();
+        $month = $this->months;
+        return view('address.address-template',compact('address','month'));
     }
 }

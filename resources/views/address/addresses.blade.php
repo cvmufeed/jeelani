@@ -43,8 +43,8 @@ function add_now() {
 	    		#{{$value->id}}<br/>
 	    		{!! nl2br($value->address) !!}<br/><input type="hidden" value="{{$value->address}}" id="address_{{$value->id}}">
 		        <div id="city_{{$value->id}}">{{$value->city}}</div>
-		        <div id="district_{{$value->id}}">{{$value->district->name}}</div>
-		        <div id="state_{{$value->id}}">{{$value->state->name}}</div>
+		        <div id="district_{{$value->id}}">{{$value->district['name']}}</div>
+		        <div id="state_{{$value->id}}">{{$value->state['name']}}</div>
 		        Phone: <span id="phone_{{$value->id}}">{{$value->phone}}</span><br/>
 		        Pin: <span id="pin_{{$value->id}}">{{$value->pin}}</span><br/>
 		        From: {{$month[$value->start_month]}}-{{$value->start_year}}<input type="hidden" id="start_month_{{$value->id}}" value="{{$value->start_month}}"><input type="hidden" id="start_year_{{$value->id}}" value="{{$value->start_year}}">
