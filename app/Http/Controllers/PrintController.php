@@ -43,13 +43,6 @@ class PrintController extends Controller
 		$address = Address::all();
 		return view('address.print-view',compact('address','options'));
 	}
-	public function printAllNow()
-	{
-		$options = Option::all();
-		$address = Address::all();
-		$todo = 'download';
-		return view('print.template',compact('options','address','todo'));
-	}
 	public function printAddress($address)
 	{
 		$id = $address;

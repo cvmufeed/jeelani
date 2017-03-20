@@ -1,28 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Print View</title>
+</head>
 <body>
     <script>
     window.onafterprint = function() {
         window.location.reload();
     }
-        function print_now() {
-            document.getElementById('dont_print').innerHTML = "";
-            
-            for(i=0;i<{{count($address)}};i++) {
-                document.getElementById('page'+i).className="";
-            }
-            //function to call after printed/cancelled
-            var onPrintFinished=function(printed){window.location.reload();}
-
-            //print command
-            onPrintFinished(window.print());
-            //window.location.replace('/print/all/now');
-            /*var prtContent = document.getElementById("print");
-            var WinPrint = window.open('/print/template', '', '');
-            WinPrint.document.write(prtContent.innerHTML);
-            WinPrint.document.close();
-            WinPrint.focus();
-            WinPrint.print();
-            WinPrint.close();*/  
+    function erase_nonprintig_area() {
+        document.getElementById('dont_print').innerHTML = "";
+        
+        for(i=0;i<{{count($address)}};i++) {
+            document.getElementById('page'+i).className="";
         }
+    }
+    function print_now() {
+        erase_nonprintig_area();
+        //function to call after printed/cancelled
+        var onPrintFinished=function(printed){window.location.reload();}
+
+        //print command
+        onPrintFinished(window.print());
+        //window.location.replace('/print/all/now');
+         
+    }
+    function download_now() {
+        
+    }
     </script>
     <div id="dont_print">
     <div class="row">

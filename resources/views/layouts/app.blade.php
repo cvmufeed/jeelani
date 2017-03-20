@@ -82,14 +82,14 @@
             </div>
         </div>
     </nav>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form action="/search" method="GET">
                 <input type="text" placeholder="Search Addressee" name="addressee">
                 <button type="submit">Search</button>
             </form>
         </div>
-    </div>
+    </div> -->
 
     @yield('content')
 
