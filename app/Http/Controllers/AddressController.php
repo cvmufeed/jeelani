@@ -20,6 +20,7 @@ class AddressController extends Controller
     private $endMonth;
 
     public function __construct() {
+        $this->middleware('auth');
         $this->currentMonth = date('m');
         $this->currentYear = date('Y');
         $this->endMonth = ($this->currentMonth > 1)? $this->currentMonth-1 : 12;
@@ -27,25 +28,16 @@ class AddressController extends Controller
 
     public function index()
     {
-        $district = District::all();
-        return $district;
+        $districts = District::all();
         return view('address.add-address', ['currentMonth' => $this->currentMonth, 'currentYear' => $this->currentYear,
-            'endMonth' => $this->endMonth]);
+            'endMonth' => $this->endMonth, 'districts' => $districts]);
     }
     public function district(District $district)			
     {	
+        $address = Address::where('district_id','=',$district->id)->get();
         $currentMonth = $this->currentMonth;
         $currentYear = $this->currentYear;
         $month = $this->months;
-        $address = Address::where('district_id','=',$district->id)->get();
-        foreach ($address as $addresses) {
-             foreach($addresses->subscription as $sub) {
-                $sub->startMonth = $sub->start%100;
-                $sub->startYear = floor($sub->start/100)+2000;
-                $sub->endMonth = $sub->end%100;
-                $sub->endYear = floor($sub->end/100)+2000;
-             }
-        }
         $endMonth = $this->endMonth;
         return view('address.addresses', compact('address','district','month','currentMonth','currentYear','endMonth'));
     }
@@ -60,7 +52,7 @@ class AddressController extends Controller
             // Authentication passed...
             $address = Address::find($request->delete_id);
             $address->delete();
-            return back();
+            return back()->with('success','Successfully deleted address of:'.$address->name.' id:'.$address->id);
         }
         else {
 
@@ -75,7 +67,7 @@ class AddressController extends Controller
         $subscription_start = ''.floor($request->startYear%100)*100+$request->startMonth;
         $subscription_end = ''.floor($request->endYear%100)*100+$request->endMonth;
         $subscription->update(['start' => $subscription_start, 'end' => $subscription_end]);
-        return back();
+        return back()->with('Success','Successfully updated address of:'.$address->name.' id:'.$address->id);
     }
     public function store(Request $request, District $district)
     {
@@ -89,7 +81,23 @@ class AddressController extends Controller
         $address->state_id = $district->state_id;
         $address->user_id = Auth::id();
         $address->save();
-        return back();
+        return back()->with('success','Successfully entered the Address:'.$address->name.' id:'.$address->id);
+    }
+
+    public function subscriptionMainPage()
+    {   $months = $this->months;
+        $subscriptions = Address::select(DB::raw('end_month,end_year,COUNT(*) AS count'))->groupBy(DB::raw('CONCAT(end_month,end_year)'))->orderBy('end_year')->orderBy('end_month')->get();
+        return view('address.subscription',compact('subscriptions','months'));
+    }
+
+    
+    public function addressTemplateView($address)
+    {
+        $currentMonth = $this->currentMonth;
+        $currentYear = $this->currentYear;
+        $month = $this->months;
+        $endMonth = $this->endMonth;
+        return view('address.address-template', compact('address','month','currentMonth','currentYear','endMonth'));
     }
 
     public function search(Request $request)
@@ -104,19 +112,13 @@ class AddressController extends Controller
             $address = Address::where('name','like','%'.$request->addressee.'%')->get();
         }
         $month = $this->months;
-        return view('address.address-template',compact('address','month'));
-    }
-    public function subscriptionMainPage()
-    {   $months = $this->months;
-        $subscriptions = Address::select(DB::raw('end_month,end_year,COUNT(*) AS count'))->groupBy(DB::raw('CONCAT(end_month,end_year)'))->orderBy('end_year')->orderBy('end_month')->get();
-        return view('address.subscription',compact('subscriptions','months'));
+        return $this->addressTemplateView($address);
     }
     public function subscriptionPage($subscription)
     {
         $year = $subscription%10000;
         $month = floor($subscription/10000);
         $address = Address::where([['end_month','=',$month],['end_year','=',$year]])->get();
-        $month = $this->months;
-        return view('address.address-template',compact('address','month'));
+        return $this->addressTemplateView($address);
     }
 }

@@ -39,7 +39,7 @@ function add_now() {
 	    @foreach ($address as $value)
 	    	<div class="list-group-item">
 	    		<sub class="pull-right">Added By: <a href="\profile\{{$value->user['id']}}">{{$value->user['name']}}</a></sub>
-	    		<a href="/address/{{ $value->id }}"/ id="name_{{$value->id}}">{{ $value->name}}</a>
+	    		<a id="name_{{$value->id}}">{{ $value->name}}</a>
 	    		#{{$value->id}}<br/>
 	    		{!! nl2br($value->address) !!}<br/><input type="hidden" value="{{$value->address}}" id="address_{{$value->id}}">
 		        <div id="city_{{$value->id}}">{{$value->city}}</div>

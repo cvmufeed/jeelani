@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 20, 2017 at 05:26 PM
+-- Generation Time: Mar 21, 2017 at 05:08 PM
 -- Server version: 5.5.54-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.21
 
@@ -44,14 +44,14 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `addresses_user_id_index` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2306 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2310 ;
 
 --
 -- Dumping data for table `addresses`
 --
 
 INSERT INTO `addresses` (`id`, `name`, `address`, `pin`, `phone`, `city`, `district_id`, `state_id`, `user_id`, `start_month`, `start_year`, `end_month`, `end_year`, `created_at`, `updated_at`) VALUES
-(1, 'Mufeed Abdulla', 'Munawiras, \r\nKadavu Road,\r\nMattul Central', 670302, '9544748315', 'Kannur', 1, 3, 1, 2, 2017, 12, 2017, '2017-03-14 03:56:25', '2017-03-20 00:39:19'),
+(1, 'Mufeed Abdulla', 'Munawiras, \r\nKadavu Road,\r\nMattul Central', 670302, '9544748315', 'Kannur', 1, 3, 1, 3, 2017, 2, 2018, '2017-03-14 03:56:25', '2017-03-21 06:05:21'),
 (2, 'Jazim CV', 'Khadeeja House,\r\nMattul Central Chaal,', 670302, '0497-2843591', 'Kanuur', 1, 3, 1, 3, 2017, 2, 2018, '2017-03-14 04:01:00', '2017-03-20 00:35:56'),
 (3, 'Mufeed Abdulla', '1G Estonia,\r\nOlive Courtyard,\r\nOpposite Carnival Infopark', 682030, '9544748315', 'Kakkanad', 3, 3, 1, 3, 2017, 2, 2018, '2017-03-14 06:06:48', '2017-03-14 06:07:27'),
 (60, 'Callum Stafford', '1184 Et Ave', 505978, '91-419-610-4181', '', 12, 3, 1, 12, 2017, 4, 2018, NULL, NULL),
@@ -64,7 +64,6 @@ INSERT INTO `addresses` (`id`, `name`, `address`, `pin`, `phone`, `city`, `distr
 (67, 'Hu Wilcox', 'P.O. Box 279, 7861 Non Avenue', 584513, '930-9911', '', 13, 3, 1, 5, 2017, 7, 2018, NULL, NULL),
 (68, 'Hall Guerrero', '818-4823 Aenean Ave', 699143, '778-2802', '', 3, 3, 1, 4, 2017, 8, 2018, NULL, NULL),
 (69, 'Tate Everett', 'Ap #577-2402 Elit, Rd.', 192462, '91-581-187-8484', '', 13, 3, 1, 7, 2017, 3, 2018, NULL, NULL),
-(70, 'Grant Calhoun', '6516 Enim, Avenue', 702485, '91-679-126-0712', '', 11, 3, 1, 4, 2017, 1, 2018, NULL, NULL),
 (71, 'Lars Hicks', 'P.O. Box 322, 7037 Varius Road', 392271, '91-609-275-5687', '', 7, 3, 1, 3, 2017, 6, 2018, NULL, NULL),
 (72, 'Beau Mccullough', '4026 Suspendisse Road', 636287, '91-879-419-9963', '', 6, 3, 1, 12, 2017, 4, 2018, NULL, NULL),
 (73, 'Herrod Rivers', 'P.O. Box 545, 8813 Non Avenue', 776085, '91-422-399-8604', '', 4, 3, 1, 5, 2017, 9, 2018, NULL, NULL),
@@ -2283,7 +2282,6 @@ INSERT INTO `addresses` (`id`, `name`, `address`, `pin`, `phone`, `city`, `distr
 (2280, 'Dennis Kelley', '115 Elit Rd.', 866077, '91-6799-278751', 'Clarksville', 4, 3, 1, 5, 2017, 7, 2018, '2017-03-20 09:34:40', NULL),
 (2281, 'Vincent Chavez', '640-8670 Tellus St.', 909134, '91-8798-431647', 'Silius', 14, 3, 1, 12, 2017, 11, 2018, '2017-03-20 09:34:40', NULL),
 (2282, 'Vaughan Garrett', '8343 Arcu. St.', 686433, '433-868-4399', 'Santiago', 10, 3, 1, 10, 2017, 11, 2018, '2017-03-20 09:34:40', NULL),
-(2283, 'Justin Stewart', 'P.O. Box 270, 1498 Id Rd.', 161561, '91-9221-677390', 'Spinoso', 9, 3, 1, 7, 2017, 1, 2018, '2017-03-20 09:34:40', NULL),
 (2284, 'George Stokes', 'Ap #906-1779 Libero. Road', 172336, '91-9999-822154', 'Castellafiume', 3, 3, 1, 8, 2017, 10, 2018, '2017-03-20 09:34:40', NULL),
 (2285, 'Blake Burris', 'P.O. Box 364, 5871 Enim Rd.', 667834, '924-025-9410', 'Sankt Johann im Pongau', 3, 3, 1, 8, 2017, 7, 2018, '2017-03-20 09:34:40', NULL),
 (2286, 'Lucius Day', '3576 Sollicitudin St.', 532393, '622-179-2445', 'Little Rock', 10, 3, 1, 5, 2017, 3, 2018, '2017-03-20 09:34:40', NULL),
@@ -2295,7 +2293,6 @@ INSERT INTO `addresses` (`id`, `name`, `address`, `pin`, `phone`, `city`, `distr
 (2292, 'Prescott Terrell', '238-8833 Quam. St.', 128116, '91-3575-608802', 'Savannah', 11, 3, 1, 6, 2017, 4, 2018, '2017-03-20 09:34:40', NULL),
 (2293, 'Chancellor Daniel', 'P.O. Box 443, 1453 Porta Rd.', 152772, '638-788-1522', 'Acquasparta', 2, 3, 1, 11, 2017, 1, 2018, '2017-03-20 09:34:40', NULL),
 (2294, 'Rigel Walters', '581-2649 Duis Avenue', 837850, '91-8364-934274', 'Maringá', 7, 3, 1, 3, 2017, 3, 2018, '2017-03-20 09:34:40', NULL),
-(2295, 'Zachery Dale', '843-5166 Egestas Ave', 386101, '841-458-2570', 'Lauterach', 1, 3, 1, 1, 2017, 12, 2018, '2017-03-20 09:34:40', NULL),
 (2296, 'Zephania Bonner', '8105 Ligula. St.', 333463, '91-9992-032685', 'Loppem', 8, 3, 1, 3, 2017, 8, 2018, '2017-03-20 09:34:40', NULL),
 (2297, 'Dylan Mendoza', 'Ap #326-6698 Sit St.', 793548, '91-7004-106596', 'Colico', 13, 3, 1, 1, 2017, 5, 2018, '2017-03-20 09:34:40', NULL),
 (2298, 'Noah Wiggins', '723-8765 Non, Ave', 397713, '487-518-7053', 'Masullas', 10, 3, 1, 2, 2017, 2, 2018, '2017-03-20 09:34:40', NULL),
@@ -2305,7 +2302,9 @@ INSERT INTO `addresses` (`id`, `name`, `address`, `pin`, `phone`, `city`, `distr
 (2302, 'Cain Finley', '914 Eu Ave', 841967, '91-9795-546340', 'Macon', 13, 3, 1, 5, 2017, 8, 2018, '2017-03-20 09:34:40', NULL),
 (2303, 'David Calhoun', '652-535 Pellentesque. Ave', 593555, '91-6811-103204', 'Mobile', 4, 3, 1, 2, 2017, 12, 2018, '2017-03-20 09:34:40', NULL),
 (2304, 'Owen Thompson', 'Ap #663-1404 Enim Avenue', 358179, '138-611-0776', 'Igboho', 10, 3, 1, 8, 2017, 8, 2018, '2017-03-20 09:34:40', NULL),
-(2305, 'Preston Walker', '380-8828 Nam Street', 549483, '424-702-3388', 'Derby', 7, 3, 1, 9, 2017, 4, 2018, '2017-03-20 09:34:40', NULL);
+(2305, 'Preston Walker', '380-8828 Nam Street', 549483, '424-702-3388', 'Derby', 7, 3, 1, 9, 2017, 4, 2018, '2017-03-20 09:34:40', NULL),
+(2306, 'Mufeed Abdulla', 'test 111', 123456, '123456789', 'test', 2, 3, 1, 3, 2017, 2, 2018, '2017-03-21 05:53:35', '2017-03-21 05:53:35'),
+(2307, 'Mr. Y', 'test', 123456, '123', 'test', 14, 3, 1, 3, 2017, 2, 2018, '2017-03-21 05:56:04', '2017-03-21 05:56:04');
 
 -- --------------------------------------------------------
 
@@ -2323,7 +2322,7 @@ CREATE TABLE IF NOT EXISTS `district` (
   PRIMARY KEY (`id`),
   KEY `district_user_id_index` (`user_id`),
   KEY `district_state_id_index` (`state_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `district`
@@ -2489,8 +2488,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Mufeed Abdulla', 'cvmufeed@gmail.com', '$2y$10$2unNwu08TC2Ou8yINrDWeOycj64jDzhrO9NNKm9Eq2wG//tZ/ek/C', 'superadmin', '4kPAVtUfHoSUhqJz1zPmSxh2Amzz7eBN6BvKBM91TmL51QDXeglcLM7HE25Q', '2017-03-14 03:51:03', '2017-03-16 01:47:17', NULL),
-(4, 'Muhammed Ali', 'ali@gmail.com', '$2y$10$ELlF958X7ipP5se0OII7b.4lAA/qo0eg56ppNbPlr9yDYl2ZfvSA2', 'admin', '3B43Hf3cKJMB30k6YlIg8IN5QtPZPEQPIeDr9ByO5PyCMxW9SZ2SMNkFrrnV', '2017-03-14 22:59:20', '2017-03-20 05:52:20', NULL);
+(1, 'Mufeed Abdulla', 'cvmufeed@gmail.com', '$2y$10$2unNwu08TC2Ou8yINrDWeOycj64jDzhrO9NNKm9Eq2wG//tZ/ek/C', 'superadmin', 'NPitwRyms5yRpCboDVkGlowz3ldlmzsQpC6kdsfVXhHGpuYzNdwLvKys1frN', '2017-03-14 03:51:03', '2017-03-21 06:07:28', NULL),
+(4, 'Muhammed Ali', 'ali@gmail.com', '$2y$10$ELlF958X7ipP5se0OII7b.4lAA/qo0eg56ppNbPlr9yDYl2ZfvSA2', 'admin', 'DKKBgH69aWNKVSeGPlQGLPDZmse1pddhlNd36lVmsRTlD3leML7US9QsO79p', '2017-03-14 22:59:20', '2017-03-21 06:07:58', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

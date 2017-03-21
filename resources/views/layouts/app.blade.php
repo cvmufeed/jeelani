@@ -55,6 +55,7 @@
                     <li><a href="{{ url('/print') }}">Print</a></li>
                     <li><a href="{{ url('/subscriptions') }}">Subscriptions</a></li>
                     <li><a href="#searchModal" data-toggle="modal">Search</a></li>
+                    <li><a href="/add/address">Quick Add Address</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

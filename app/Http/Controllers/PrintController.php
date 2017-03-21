@@ -62,4 +62,12 @@ class PrintController extends Controller
 		$options = Option::all();
 		return view('address.print-view',compact('address','options'));
 	}
+	public function printSubscription($subscription)
+	{
+		$options = Option::all();
+		$year = $subscription%10000;
+        $month = floor($subscription/10000);
+        $address = Address::where([['end_month','=',$month],['end_year','=',$year]])->get();
+        return view('address.print-view',compact('address','options'));
+	}
 }

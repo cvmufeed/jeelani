@@ -4,6 +4,10 @@
 .pointer {
 	cursor: pointer; cursor: hand;
 }
+.table-img {
+	margin:auto;
+	display:block;
+}
 </style>
 <script>
 function change_user_type(value) {
@@ -41,14 +45,18 @@ function permanently_delete_user(value,name) {
 <div class="table-responsive">
 <table class="table table-condensed table-hover table-bordered table-striped">
 	<tr class="active"><td>No</td><td>Name</td><td>Email</td><td>Type</td><td>Change Password</td><td>Options</td></tr>
-	<?php $i=1; ?>
+	<?php $i=1;$authenticated_user = Auth::user()->id; ?>
 	@foreach ($users as $user)
 		<tr class="active">
 			<td>{{$i++}}</td><td>{{$user->name}}</td><td>{{$user->email}}</td>
+			@if ($user->id != $authenticated_user)
 			<td>{{ Form::select('type',['admin' => 'admin','superadmin' => 'superadmin'],$user->type,['onchange'=>'change_user_type('.$user->id.')','id'=>'type'.$user->id]) }}</td>
-			<td><input type="text" name="password" id="password{{$user->id}}"><img class="pointer" src="\images\submit.png" width=25 height=25 onclick="change_password({{$user->id}})"></td>
-			<td><img class="pointer" src="/images/delete.png" width=25 height=25 title="delete {{$user->name}}" onclick="delete_user({{$user->id}},'{{$user->name}}')">
+			<td><input type="text" name="password" id="password{{$user->id}}" style="width:85%"><img class="pointer" src="\images\submit.png" width=25 height=25 onclick="change_password({{$user->id}})"></td>
+			<td><img class="pointer table-img" src="/images/delete.png" width=25 height=25 title="delete {{$user->name}}" onclick="delete_user({{$user->id}},'{{$user->name}}')">
 			</td>
+			@else
+			<td colspan=3 style="text-align:center">N.A</td>
+			@endif
 			</tr>
 	@endforeach
 </table>

@@ -37,6 +37,7 @@
     </div>
     <button onclick="print_now()" class="btn btn-primary">Print</button>
     <a href="\home">Go Home</a><hr/>
+    Number of pages: {{$address->count()}}<hr/>
     All values are in mm
     <form action="/print/options/edit" method="post">
         {{csrf_field()}}
