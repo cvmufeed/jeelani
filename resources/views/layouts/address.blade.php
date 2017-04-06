@@ -15,20 +15,30 @@
     function reload() {
         location.reload();
     }
-</script>	
-	<script>
-		function dateRangeSelect() {
-			var month1 = document.getElementById('month1').value;
-			var year1 = Number(document.getElementById('year1').value);
-			if (month1>1) {
-				document.getElementById('month2').value = month1-1;
-				document.getElementById('year2').value = year1+1;
-			}
-			else {
-				document.getElementById('month2').value = 12;
-				document.getElementById('year2').value = year1;
-			}
+	function dateRangeSelect() {
+		var month1 = document.getElementById('month1').value;
+		var year1 = Number(document.getElementById('year1').value);
+		if (month1>1) {
+			document.getElementById('month2').value = month1-1;
+			document.getElementById('year2').value = year1+1;
 		}
+		else {
+			document.getElementById('month2').value = 12;
+			document.getElementById('year2').value = year1;
+		}
+	}
+    function dateRangeSelectModal() {
+        var month1 = document.getElementById('month_modal1').value;
+        var year1 = Number(document.getElementById('year_modal1').value);
+        if (month1>1) {
+            document.getElementById('month_modal2').value = month1-1;
+            document.getElementById('year_modal2').value = year1+1;
+        }
+        else {
+            document.getElementById('month_modal2').value = 12;
+            document.getElementById('year_modal2').value = year1;
+        }
+    }
 	</script>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
