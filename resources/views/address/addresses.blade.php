@@ -42,7 +42,7 @@ function add_now() {
 	    		<a id="name_{{$value->id}}">{{ $value->name}}</a>
 	    		#{{$value->id}}<br/>
 	    		{!! nl2br($value->address) !!}<br/><input type="hidden" value="{{$value->address}}" id="address_{{$value->id}}">
-		        <div id="city_{{$value->id}}">{{$value->city}}</div>
+		        <div id="city_{{$value->id}}">P.O {{$value->city}}</div>
 		        <div id="district_{{$value->id}}">{{$value->district['name']}}</div>
 		        <div id="state_{{$value->id}}">{{$value->state['name']}}</div>
 		        Phone: <span id="phone_{{$value->id}}">{{$value->phone}}</span><br/>
@@ -63,7 +63,7 @@ function add_now() {
 	    	Name*: <input type="text" class="form-control" name="name" value='{{ old('name') }}'>
 	        Address*: <textarea name="address" rows=6 class = "form-control" placeholder="Enter the address">{{ old('address') }}</textarea>
 	    	Pin*: <input type="number" class="form-control" name="pin" min=100000 max=999999>
-	    	City:<input type="text" class="form-control" name="city" placeholder="Enter city name">
+	    	P.O:<input type="text" class="form-control" name="city" placeholder="Enter Post Office">
 	    	Phone:<input type="text" class="form-control" name="phone" placeholder="Enter Phone number">
 	    	<br/>
 	    	*Mandatory<br/>
@@ -127,7 +127,7 @@ function add_now() {
 				    	Name*: <input type="text" class="form-control" name="name" value="">
 				        Address*: <textarea name="address" rows=6 class = "form-control" placeholder="Enter the address"></textarea>
 				    	Pin*: <input type="number" class="form-control" name="pin" min=100000 max=999999>
-				    	City:<input type="text" class="form-control" name="city" placeholder="Enter city name">
+				    	P.O:<input type="text" class="form-control" name="city" placeholder="Enter Post Office">
 				    	Phone:<input type="text" class="form-control" name="phone" placeholder="Enter Phone number">
 				    	<br/>
 				    	<input type="hidden" name="id" value="">
