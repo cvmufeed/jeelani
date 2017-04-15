@@ -39,35 +39,42 @@ class PrintController extends Controller
 	}
 	public function all()
 	{
-		$options = Option::all();
 		$address = Address::all();
-		return view('address.print-view',compact('address','options'));
+		return $this->passPrintToView($address);
 	}
 	public function printAddress($address)
 	{
 		$id = $address;
 		$address = Address::where('id',$id)->get();
-		$options = Option::all();
-		return view('address.print-view',compact('address','options'));
+		return $this->passPrintToView($address);
 	}
 	public function printDistrict($district)
 	{
 		$address = Address::where('district_id',$district)->get();
-		$options = Option::all();
-		return view('address.print-view',compact('address','options'));
+		return $this->passPrintToView($address);
 	}
 	public function printState($state)
 	{
 		$address = Address::where('state_id',$state)->get();
-		$options = Option::all();
-		return view('address.print-view',compact('address','options'));
+		return $this->passPrintToView($address);
 	}
 	public function printSubscription($subscription)
 	{
-		$options = Option::all();
 		$year = $subscription%10000;
         $month = floor($subscription/10000);
         $address = Address::where([['end_month','=',$month],['end_year','=',$year]])->get();
-        return view('address.print-view',compact('address','options'));
+        return $this->passPrintToView($address);
+	}
+	public function passPrintToView($address) {
+		$options = Option::all();
+		$address = $address->reject(function ($item) { 
+			$collection_year_month = $item->end_year*100+$item->end_month;
+			$reject_year_month=date('Y')*100+date('m'); 
+			if ($collection_year_month < $reject_year_month) 
+			{
+				return $item;
+			} 
+		});
+		return view('address.print-view',compact('address','options'));
 	}
 }

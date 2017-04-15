@@ -84,18 +84,21 @@
     </style>
             <?php
             $months = ['null','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            for($i = 0 ; $i < count($address); $i++) {
+            $i=0;
+            foreach ($address as $value) {
                 echo '<div class="page" id="page'.$i.'"><div class="address">';
-                echo 'END '.$months[$address[$i]->end_month].'-'.$address[$i]->end_year.'<br/>';
-                echo $address[$i]->name.'    #'.$address[$i]->id.'<br/>';
-                echo nl2br($address[$i]->address).'<br/>';
-                echo $address[$i]->city.'<br/>';
-                echo $address[$i]->district->name.'<br/>';
-                echo $address[$i]->state->name.'<br/>';
-                echo 'PIN:'.$address[$i]->pin.'<br/>';
-                echo 'Phone:'.$address[$i]->phone.'<br/>';
+                echo 'END '.$months[$value->end_month].'-'.$value->end_year.'<br/>';
+                echo $value->name.'    #'.$value->id.'<br/>';
+                echo nl2br($value->address).'<br/>';
+                if ($value->city != '') {
+                    echo 'P.O: '.$value->city.'<br/>';
+                }
+                echo $value->district->name.'<br/>';
+                echo $value->state->name.'<br/>';
+                echo 'PIN:'.$value->pin.'<br/>';
+                echo 'Phone:'.$value->phone.'<br/>';
                 echo '</div></div>';
-
+                $i++;
             }
             ?>
     </div>
