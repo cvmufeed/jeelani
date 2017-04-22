@@ -12,8 +12,8 @@
 	    <div class="form-group" id="address_form">
 	    	Name*: <input type="text" class="form-control" name="name" value='{{ old('name') }}'>
 	        Address*: <textarea name="address" rows=6 class = "form-control" placeholder="Enter the address">{{ old('address') }}</textarea>
-	    	Pin*: <input type="number" class="form-control" name="pin" min=100000 max=999999>
-	    	City:<input type="text" class="form-control" name="city" placeholder="Enter city name">
+	    	P.O:<input type="text" class="form-control" name="city" placeholder="Enter Post Office">
+	    	Pin*: <input type="number" class="form-control" placeholder="Enter Pin Number" name="pin" min=100000 max=999999>
 	    	Phone:<input type="text" class="form-control" name="phone" placeholder="Enter Phone number">
 	    	District:
 	    	<select name="district" class="form-control" onchange="setFormAction(this.value)">
