@@ -96,6 +96,10 @@
 
     @yield('content')
 
+    <a class="btn-floating btn-lg purple-gradient" style="background-color:#ccc;position: fixed;right:10px;bottom: 10px;" onclick="window.scrollTo(0,0);">
+      <span class="glyphicon glyphicon-arrow-up"></span>
+    </a>
+
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
