@@ -35,7 +35,7 @@ Route::post('/edit-user/restore', 'UserController@restore_user')->middleware('su
 Route::post('/edit-user/permanent-delete', 'UserController@permanently_delete_user')->middleware('superadmin');
 //SuperAdmin functions end
 
-Route::get('/','PagesController@home');
+Route::get('/','StateController@index');
 
 Route::auth();
 

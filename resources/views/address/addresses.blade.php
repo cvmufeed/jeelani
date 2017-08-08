@@ -42,7 +42,7 @@ function add_now() {
 	    		<a id="name_{{$value->id}}">{{ $value->name}}</a>
 	    		#{{$value->id}}<br/>
 	    		{!! nl2br($value->address) !!}<br/><input type="hidden" value="{{$value->address}}" id="address_{{$value->id}}">
-		        <div id="city_{{$value->id}}">P.O {{$value->city}}</div>
+		        <div>P.O <span id="city_{{$value->id}}">{{$value->city}}</span></div>
 		        <div id="district_{{$value->id}}">{{$value->district['name']}}</div>
 		        <div id="state_{{$value->id}}">{{$value->state['name']}}</div>
 		        Phone: <span id="phone_{{$value->id}}">{{$value->phone}}</span><br/>
