@@ -89,14 +89,16 @@
                 echo '<div class="page" id="page'.$i.'"><div class="address">';
                 echo 'END '.$months[$value->end_month].'-'.$value->end_year.'<br/>';
                 echo $value->name.'    #'.$value->id.'<br/>';
-                echo nl2br($value->address).'<br/>';
+                echo nl2br(preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $value->address)).'<br/>';
                 if ($value->city != '') {
                     echo 'P.O: '.$value->city.'<br/>';
                 }
                 echo $value->district->name.'<br/>';
                 echo $value->state->name.'<br/>';
                 echo 'PIN:'.$value->pin.'<br/>';
-                echo 'Phone:'.$value->phone.'<br/>';
+                if ($value->phone != "") {
+                    echo 'Phone:'.$value->phone.'<br/>';    
+                }
                 echo '</div></div>';
                 $i++;
             }

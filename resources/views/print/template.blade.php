@@ -38,7 +38,9 @@
             echo $address[$i]->district->name.'<br/>';
             echo $address[$i]->state->name.'<br/>';
             echo 'PIN:'.$address[$i]->pin.'<br/>';
-            echo 'Phone:'.$address[$i]->phone.'<br/>';
+            if ($address[$i]->phone != "") {
+                echo 'Phone:'.$address[$i]->phone.'<br/>';
+            }
             echo '</div></div></div>';
 
         }

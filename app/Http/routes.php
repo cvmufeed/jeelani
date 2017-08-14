@@ -77,3 +77,7 @@ Route::get('print/address/{address}', 'PrintController@printAddress');
 Route::get('/print/district/{district}', 'PrintController@printDistrict');
 Route::get('/print/state/{state}','PrintController@printState');
 Route::get('/print/subscription/{subscription}','PrintController@printSubscription');
+
+//SMS routes
+Route::get('/sms','NotificationController@sms_index');
+Route::post('/sms','NotificationController@sms_send');
