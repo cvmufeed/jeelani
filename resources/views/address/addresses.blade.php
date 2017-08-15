@@ -52,6 +52,7 @@ function add_now() {
 		        <a href="#editModal" data-toggle="modal" onclick="editNow({{$value->id}})">edit</a>&nbsp;&nbsp;
 		        <a href="#deleteModal" data-toggle="modal" onclick="deleteNow({{$value->id}})">delete</a>
 		        <a href="/print/address/{{$value->id}}" class="pull-right"><i class="glyphicon glyphicon-print"></i></a>
+		        <a href="/sms?phone={{$value->phone}}" class="pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-envelope"></i></a>
 	        </div>
 	    @endforeach
 	</ul>
