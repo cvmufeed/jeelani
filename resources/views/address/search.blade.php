@@ -25,9 +25,9 @@ function editNow(value) {
 	    		<a href="/address/{{ $value->id }}"/ id="name_{{$value->id}}">{{ $value->name}}</a>
 	    		#{{$value->id}}<br/>
 	    		{!! nl2br($value->address) !!}<br/><input type="hidden" value="{{$value->address}}" id="address_{{$value->id}}">
-		        <div id="city_{{$value->id}}">{{$value->city}}</div>
 		        <div id="district_{{$value->id}}">{{$value->district->name}}</div>
 		        <div id="state_{{$value->id}}">{{$value->state->name}}</div>
+		        P.O: <span id="city_{{$value->id}}">{{$value->city}}</span><br/>
 		        Phone: <span id="phone_{{$value->id}}">{{$value->phone}}</span><br/>
 		        Pin: <span id="pin_{{$value->id}}">{{$value->pin}}</span><br/>
 		        From: {{$month[$value->subscription[0]->startMonth]}}-{{$value->subscription[0]->startYear}}

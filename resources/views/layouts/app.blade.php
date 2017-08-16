@@ -117,7 +117,15 @@
             </div>
             <div class="modal-body">
               <form action="/search" method="GET">
-                <input type="text" class="form-control" autocomplete="off" name="addressee" placeholder="Enter number or name...">
+                <span>Search By</span>
+                <select name="option" style="margin-bottom: 10px;">
+                    <option value="name_id">Name or ID</option>
+                    <option value="pin">Pin</option>
+                    <option value="address">Address</option>
+                    <option value="phone">Phone</option>
+                    <option value="po">P.O</option>
+                </select>
+                <input type="text" class="form-control" autocomplete="off" name="search" placeholder="Type Here to Search...">
                 <br/>
                 <input type="submit" class="btn btn-primary" value="Submit">
               </form>

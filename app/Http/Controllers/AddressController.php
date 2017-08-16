@@ -102,14 +102,28 @@ class AddressController extends Controller
 
     public function search(Request $request)
     {
-        if ($request->addressee == '') {
-            return back();
+        if ($request->search == '') {
+            return back()->with('error','Enter text in search box');
         }
-        if (is_numeric($request->addressee)) {
-            $address = Address::where('id',$request->addressee)->get();
-        }
-        else {
-            $address = Address::where('name','like','%'.$request->addressee.'%')->get();
+        switch ($request->option) {
+            case 'name_id':
+                if (is_numeric($request->search)) {
+                    $address = Address::where('id',$request->search)->get();
+                }
+                else {
+                    $address = Address::where('name','like','%'.$request->search.'%')->get();
+                }
+                break;
+            case 'pin': $address = Address::where('pin','like','%'.$request->search.'%')->get();
+            break;
+            case 'phone': $address = Address::where('phone','like','%'.$request->search.'%')->get();
+            break;
+            case 'address': $address = Address::where('address','like','%'.$request->search.'%')->get();
+            break;
+            case 'po': $address = Address::where('city','like','%'.$request->search.'%')->get();//po is stored as city in database
+            break;
+            default:return back()->with('error','Sorry couldn\'t search. Contact Admin');
+                break; 
         }
         $month = $this->months;
         return $this->addressTemplateView($address);

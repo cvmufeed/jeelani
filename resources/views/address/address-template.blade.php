@@ -28,7 +28,7 @@ function editNow(value) {
 	    		<a id="name_{{$value->id}}">{{ $value->name}}</a>
 	    		#{{$value->id}}<br/>
 	    		{!! nl2br($value->address) !!}<br/><input type="hidden" value="{{$value->address}}" id="address_{{$value->id}}">
-		        <div id="city_{{$value->id}}">{{$value->city}}</div>
+		        P.O <span id="city_{{$value->id}}">{{$value->city}}</span><br/>
 		        <div id="district_{{$value->id}}">{{$value->district->name}}</div>
 		        <div id="state_{{$value->id}}">{{$value->state->name}}</div>
 		        Phone: <span id="phone_{{$value->id}}">{{$value->phone}}</span><br/>
@@ -91,7 +91,7 @@ function editNow(value) {
 				    	Name*: <input type="text" class="form-control" name="name" value="">
 				        Address*: <textarea name="address" rows=6 class = "form-control" placeholder="Enter the address"></textarea>
 				    	Pin*: <input type="number" class="form-control" name="pin" min=100000 max=999999>
-				    	City:<input type="text" class="form-control" name="city" placeholder="Enter city name">
+				    	P.O:<input type="text" class="form-control" name="city" placeholder="Enter city name">
 				    	Phone:<input type="text" class="form-control" name="phone" placeholder="Enter Phone number">
 				    	<br/>
 				    	<input type="hidden" name="id" value="">
