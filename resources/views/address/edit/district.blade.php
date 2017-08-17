@@ -1,4 +1,4 @@
-@extends ('layouts.address')
+@extends ('layouts.app')
 @section ('address_content')
 <h2>Edit the note</h2>
 	<form method="POST" action="/district/{{ $district->id }}">

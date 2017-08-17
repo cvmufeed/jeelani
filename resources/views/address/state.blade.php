@@ -1,4 +1,4 @@
-@extends ('layouts.address')
+@extends('layouts.app')
 @section ('address_content')
 <br/><br/>
 <a href="/home" class="btn btn-primary">Go Back</a>
@@ -7,7 +7,7 @@
             {{ csrf_field() }}
             {{ method_field('patch') }}
 </form>
-
+<script>window.state_id = {{$state->id}}</script>
 <h2>{{$state->name}}</h2>
 <ul class="list-group">
     @foreach ($state->district as $district)
@@ -34,6 +34,7 @@
     </div>
 </form>
 
+{{ Form::select('state_id',$states,null,['id' => 'select_state_edit','style' => 'display:none']) }}
 
 @if (count($errors))
     <ul>
@@ -42,28 +43,4 @@
         @endforeach
     </ul>
 @endif
-
-<!-- 
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Edit</button>
-
-<div id="id01" class="modal">
-  
-  <form class="modal-content animate" action="/action_page.php">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-    </div>
-
-    <div class="container">
-      <label><b>Edit the District</b></label>
-      <input type="text" name="name" value="Kannur" required>
-
-        
-      <button type="submit">Update District</button>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-    </div>
-  </form>
-</div> -->
 @stop

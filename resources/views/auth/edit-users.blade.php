@@ -1,4 +1,4 @@
-@extends('layouts.address')
+@extends('layouts.app')
 @section('address_content')
 <style type="text/css">
 .pointer {

@@ -39,7 +39,15 @@ class AddressController extends Controller
         $currentYear = $this->currentYear;
         $month = $this->months;
         $endMonth = $this->endMonth;
-        return view('address.addresses', compact('address','district','month','currentMonth','currentYear','endMonth'));
+        $states = State::select('id','name')->pluck('name','id')->toArray();
+        $districts = $this->getDistrictList();
+        return view('address.addresses', compact('address','district','month','currentMonth','currentYear','endMonth','states','districts'));
+    }
+    public function getDistrictList() {
+        //getting district list for json output
+        $districts = District::all()->groupBy('state_id')->toArray();
+        $districts_json = json_encode($districts);
+        return $districts_json;
     }
     public function show(Address $address)      
     {   
@@ -97,7 +105,9 @@ class AddressController extends Controller
         $currentYear = $this->currentYear;
         $month = $this->months;
         $endMonth = $this->endMonth;
-        return view('address.address-template', compact('address','month','currentMonth','currentYear','endMonth'));
+        $states = State::select('id','name')->pluck('name','id')->toArray();
+        $districts = $this->getDistrictList();
+        return view('address.address-template', compact('address','month','currentMonth','currentYear','endMonth','states','districts'));
     }
 
     public function search(Request $request)

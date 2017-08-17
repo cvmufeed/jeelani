@@ -1,4 +1,4 @@
-@extends ('layouts.address')
+@extends('layouts.app')
 @section ('address_content')
 <h2>Active Subscription</h2>
 <ul class="list-group">

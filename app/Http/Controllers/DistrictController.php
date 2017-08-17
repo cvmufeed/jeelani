@@ -41,7 +41,9 @@ class DistrictController extends Controller
     public function update(Request $request, District $district)
     {
     	$district->update($request->all());
-    	return back();
+        $district->state_id = $request->state_id;
+        $district->save();
+    	return back()->with('message','Successfully updated district '.$district->name);
     }
     public function delete(District $district)
     {

@@ -23,7 +23,8 @@ class StateController extends Controller
     {		
     	$state->load('district.user');
     	//$state =  State::with('district.user')->find($state->id);
-    	return view('address.state', compact('state'));
+        $states = State::select('id','name')->pluck('name','id')->toArray();
+    	return view('address.state', compact('state','states'));
     }
 
     public function store(Request $request)			

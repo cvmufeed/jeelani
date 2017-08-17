@@ -1,4 +1,4 @@
-@extends ('layouts.address')
+@extends('layouts.app')
 @section ('address_content')
     @if (Session::has('status'))
         <div class="Alert">{{ Session::get('status') }}</div>

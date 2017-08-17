@@ -1,4 +1,4 @@
-@extends('layouts.address')
+@extends('layouts.app')
 @section('address_content')
 <br/><br/>
 Name: {{$user->name}}
