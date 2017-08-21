@@ -42,6 +42,7 @@ class DistrictController extends Controller
     {
     	$district->update($request->all());
         $district->state_id = $request->state_id;
+        Address::where('district_id',$district->id)->update(['state_id'=>$request->state_id]);
         $district->save();
     	return back()->with('message','Successfully updated district '.$district->name);
     }
