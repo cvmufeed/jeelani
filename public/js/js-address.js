@@ -85,4 +85,17 @@ function selectDistrict() {
 }
 $( document ).ready(function() {
     console.log("Ready!!!");
+    $("#search_option_selected").on("change",function() {
+		var option = $("#search_option_selected");
+		var search_text = $("#search_text")
+		var select_month = $("#search_by_month")
+		if (option.val() == "creation_month") {
+			search_text.hide();
+			select_month.show();
+		}
+		else {
+			search_text.show();
+			select_month.hide();
+		}
+    });
 });

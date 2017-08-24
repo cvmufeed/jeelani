@@ -11,6 +11,8 @@ use App\State;
 use App\District;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use DateTime;
+use DateTimeZone;
 
 class AddressController extends Controller
 {
@@ -113,7 +115,7 @@ class AddressController extends Controller
 
     public function search(Request $request)
     {
-        if ($request->search == '') {
+        if ($request->search == '' && $request->option != "creation_month") {
             return back()->with('error','Enter text in search box');
         }
         switch ($request->option) {
@@ -132,6 +134,13 @@ class AddressController extends Controller
             case 'address': $address = Address::where('address','like','%'.$request->search.'%')->get();
             break;
             case 'po': $address = Address::where('city','like','%'.$request->search.'%')->get();//po is stored as city in database
+            break;
+            case 'creation_month':
+            $date = new DateTime($request->start_year."-".$request->start_month."-01");
+            $date_end = new DateTime($request->start_year."-".$request->start_month."-".$date->format('t')." 23:59:59");
+            $date->setTimezone(new DateTimeZone("UTC"));
+            $date_end->setTimezone(new DateTimeZone("UTC"));
+            $address = Address::where([['created_at','>=',$date],['created_at','<=',$date_end]])->get();
             break;
             default:return back()->with('error','Sorry couldn\'t search. Contact Admin');
                 break; 
