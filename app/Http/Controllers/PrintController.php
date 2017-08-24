@@ -44,7 +44,7 @@ class PrintController extends Controller
 	}
 	public function all_in_a4()
 	{
-		$address = Address::all();
+		$address = Address::where('id','>',0)->orderBy("district_id")->get();
 		return $this->passPrintToView($address,'A4');
 	}
 	public function printAddress($address)
