@@ -28,9 +28,10 @@ class AddressController extends Controller
 
     public function index()
     {
-        $districts = District::all();
+        $states = State::select('id','name')->pluck('name','id')->toArray();
+        $districts = $this->getDistrictList();
         return view('address.add-address', ['currentMonth' => $this->currentMonth, 'currentYear' => $this->currentYear,
-            'endMonth' => $this->endMonth, 'districts' => $districts]);
+            'endMonth' => $this->endMonth, 'districts' => $districts,'states' => $states]);
     }
     public function district(District $district)			
     {	

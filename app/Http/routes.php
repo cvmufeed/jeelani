@@ -70,6 +70,7 @@ Route::get('/search', 'AddressController@search');
 //Printing functions
 Route::get('/print', 'PrintController@index');
 Route::get('/print/all', 'PrintController@all');
+Route::get('/print/all/a4', 'PrintController@all_in_a4');
 Route::get('/print/template', function() {return view('print.template');});
 Route::post('/print/options/edit', 'OptionController@setOptions');
 Route::get('/print/all/now', 'PrintController@printAllNow');

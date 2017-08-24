@@ -42,6 +42,11 @@ class PrintController extends Controller
 		$address = Address::all();
 		return $this->passPrintToView($address);
 	}
+	public function all_in_a4()
+	{
+		$address = Address::all();
+		return $this->passPrintToView($address,'A4');
+	}
 	public function printAddress($address)
 	{
 		$id = $address;
@@ -65,7 +70,7 @@ class PrintController extends Controller
         $address = Address::where([['end_month','=',$month],['end_year','=',$year]])->get();
         return $this->passPrintToView($address);
 	}
-	public function passPrintToView($address) {
+	public function passPrintToView($address,$page_size = "") {
 		$options = Option::all();
 		$address = $address->reject(function ($item) { 
 			$collection_year_month = $item->end_year*100+$item->end_month;
@@ -75,6 +80,11 @@ class PrintController extends Controller
 				return $item;
 			} 
 		});
-		return view('address.print-view',compact('address','options'));
+		if ($page_size == "") {
+			return view('address.print-view',compact('address','options'));
+		}
+		else {
+			return view('address.print-in-a4',compact('address','options'));
+		}
 	}
 }

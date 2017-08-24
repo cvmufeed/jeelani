@@ -1,13 +1,8 @@
 @extends('layouts.app')
 @section ('address_content')
-<script>
-	function setFormAction(value) {
-		document.getElementById('form_add').action = "/district/"+value+"/add-address";
-	}
-</script>
 <h1>Add Addresses</h1>
 <hr>
-	<form method="POST" id="form_add" action="/district/{{$districts[0]->id}}/add-address">
+	<form method="POST" id="form_add" action onmouseover="selectDistrict()">
 		{{ csrf_field() }}
 	    <div class="form-group" id="address_form">
 	    	Name*: <input type="text" class="form-control" name="name" value='{{ old('name') }}'>
@@ -15,12 +10,10 @@
 	    	P.O:<input type="text" class="form-control" name="city" placeholder="Enter Post Office">
 	    	Pin*: <input type="number" class="form-control" placeholder="Enter Pin Number" name="pin" min=100000 max=999999>
 	    	Phone:<input type="text" class="form-control" name="phone" placeholder="Enter Phone number">
-	    	District:
-	    	<select name="district" class="form-control" onchange="setFormAction(this.value)">
-	    		@foreach ($districts as $district)
-	    			<option value="{{$district->id}}">{{$district->name}}</option>
-	    		@endforeach
-	    	</select>
+	    	State: {{ Form::select('state_id',$states,null,['id' => 'select_state_edit','onChange' => 'selectDistrict()','class' => 'form-control']) }}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            District: {{Form::select('district',[],null,array('id' => 'select_district_edit','onChange' => 'setFormAction(this.value)','class' => 'form-control'))}}
+            <input type="hidden" value="{{$districts}}" id="district_list">
 	    	<br/>
 	    	*Mandatory<br/>
 	    	Subscription Starts : {{ Form::selectMonth('start_month',$currentMonth, array('onChange' => 'dateRangeSelect()', 'id' => 'month1')) }} {{ Form::selectRange('start_year', $currentYear-1, $currentYear+6, $currentYear, array('onChange' => 'dateRangeSelect()', 'id' => 'year1')) }}&nbsp;&nbsp;&nbsp;&nbsp;

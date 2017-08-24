@@ -11,6 +11,9 @@ function edit(value,link) {
     	selectStateEdit.show();
     }
 }
+function setFormAction(value) {
+	document.getElementById('form_add').action = "/district/"+value+"/add-address";
+}
 function delete_now(id,name,link) {
     if(confirm('Are you sure you want to delete '+name+'?')) {
         window.location.replace('/'+link+'/'+id+'/delete');
@@ -78,6 +81,7 @@ function selectDistrict() {
 	$.each(district, function(key, value) {
     	$('#select_district_edit').append("<option value='"+value.id+"'>"+value.name+"</option>");
 	});
+	$('#select_district_edit').trigger("onchange");
 }
 $( document ).ready(function() {
     console.log("Ready!!!");

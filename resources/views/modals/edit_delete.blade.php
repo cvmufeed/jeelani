@@ -39,7 +39,7 @@
           {{ csrf_field() }}
           {{ method_field('patch') }}
           <div class="form-group">
-            Name*: <input type="text" class="form-control" name="name" value="">
+            Name*: <input type="text" class="form-control" name="name" value=""  onkeyup='selectDistrict()'>
             Address*: <textarea name="address" rows=6 class = "form-control" placeholder="Enter the address"></textarea>
             Pin*: <input type="number" class="form-control" name="pin" min=100000 max=999999>
             P.O:<input type="text" class="form-control" name="city" placeholder="Enter Post Office">
@@ -50,10 +50,10 @@
             State: {{ Form::select('state_id',$states,null,['id' => 'select_state_edit','onChange' => 'selectDistrict()']) }}
             &nbsp;&nbsp;&nbsp;&nbsp;
             District: {{Form::select('district_id',['0' => 'None'],null,array('id' => 'select_district_edit'))}}
+            <input type="hidden" value="{{$districts}}" id="district_list">
             <br/><br/>
             Subscription Starts : {{ Form::selectMonth('start_month',$currentMonth, array('onChange' => 'dateRangeSelectModal()', 'id' => 'month_modal1')) }} {{ Form::selectRange('start_year', $currentYear-1, $currentYear+6, $currentYear, array('onChange' => 'dateRangeSelectModal()', 'id' => 'year_modal1')) }}&nbsp;&nbsp;&nbsp;&nbsp;
             Subscription Ends : {{ Form::selectMonth('end_month',$endMonth, array('id' => 'month_modal2')) }} {{ Form::selectRange('end_year', $currentYear, $currentYear+5, $currentYear+1, array('id' => 'year_modal2')) }}
-            <input type="hidden" value="{{$districts}}" id="district_list">
           </div>
           <div class="form-group">
             <button type="submit" class = "btn btn-primary" id="modal_submit">Update</submit>
