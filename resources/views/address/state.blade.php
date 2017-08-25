@@ -17,7 +17,15 @@
         <a onclick="delete_now({{$district->id}},'{{$district->name}}','district')">delete</a>
         </span>
         <br/>
-        <a href="/print/district/{{$district->id}}" class="pull-right"><i class="glyphicon glyphicon-print"></i></a>
+          <div class="dropdown pull-right">
+            <button class="btn btn-primary dropdown-toggle js-print" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-print"></i>
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="/print/district/{{$district->id}}" class="pull-right">Normal</a></li>
+              <li><a href="/print/all/a4?district={{$district->id}}" class="pull-right">A4</a></li>
+            </ul>
+          </div>
+        
         <br/>
         </li>
     @endforeach
