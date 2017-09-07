@@ -47,6 +47,12 @@ class PrintController extends Controller
 		if (isset($request->district)) {
 			$address = Address::where([['id','>',0],['district_id',$request->district]])->get();
 		}
+		else if (isset($request->date)) {
+			$subscription = $request->date;
+			$year = $subscription%10000;
+	        $month = floor($subscription/10000);
+	        $address = Address::where([['end_month','=',$month],['end_year','=',$year]])->get();
+		}
 		else {
 			$address = Address::where('id','>',0)->orderBy("district_id")->get();
 		}

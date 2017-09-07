@@ -2,3 +2,9 @@
 	height: 27px;
 	padding: 4px;
 }
+.js-print-subscription {
+	background-color: #777;
+	border-color: #777;
+	margin-right: 5px;
+    margin-top: -5px;
+}
