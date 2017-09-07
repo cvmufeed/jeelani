@@ -3,6 +3,7 @@
 <head>
     <title>Print View A4</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/print_a4.css">
 </head>
 <body>
     <script>
@@ -49,39 +50,6 @@
     <hr/> -->
     </div>
     <div id="print">
-        <style type="text/css" media="print">
-        @page 
-        {
-            size: auto;   /* auto is the initial value */
-            margin: 0mm;  /* this affects the margin in the printer settings */
-        }
-        </style>
-        <style>
-        .page-break {
-            page-break-after: always;
-            width:100%;
-        }
-        .page {
-            border:dashed;
-            height:297mm;
-            width:210mm;
-            
-        }
-        .address {
-            border:1px solid;
-            margin:0px;
-            font-size: 3mm;
-            width:50mm;
-            height:48mm;
-            display: inline-flex;
-            
-        }
-        .page-print {
-            border:0px dotted;
-            height:297mm;
-            width:210mm;
-        }
-    </style>
             <?php
             $months = ['null','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
             $i=0;
