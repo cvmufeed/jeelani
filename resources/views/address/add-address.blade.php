@@ -2,7 +2,7 @@
 @section ('address_content')
 <h1>Add Addresses</h1>
 <hr>
-	<form method="POST" id="form_add" action onmouseover="selectDistrict()">
+	<form method="POST" id="form_add" action>
 		{{ csrf_field() }}
 	    <div class="form-group" id="address_form">
 	    	Name*: <input type="text" class="form-control" name="name" value='{{ old('name') }}'>
@@ -23,7 +23,11 @@
 	        <button type="submit" class = "btn btn-primary">Add Address</submit>
 	    </div>
 	</form>
-
+	<script type="text/javascript">
+		window.onload = function(){
+    		document.getElementById('select_state_edit').selectedIndex = -1;
+  		}
+	</script>
 	@if (count($errors))
     <ul class="error">
         @foreach ($errors->all() as $error)
