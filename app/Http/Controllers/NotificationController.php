@@ -61,6 +61,7 @@ class NotificationController extends Controller
 		return($response);
     }
     public function sms_send_now($sms){
+        // $sms['phone'] = phone_number | $sms['message'] = message
     	$api_call='http://my.msgwow.com/api/sendhttp.php?authkey=168854AElpsPjoHR598930c6&mobiles='.$sms['phone'].'&message='.urlencode($sms['message']).'&sender=JILANI&route=4&country=91&response=json';
     	$client = new Client();
     	$res = $client->request('GET', $api_call);
@@ -78,5 +79,11 @@ class NotificationController extends Controller
     	$sms_count = Notification::where([["address_id",$address->id],["status",1],["updated_at",">",$date_start],["updated_at","<",$date_end]])->get()->count();
     	$flag = ($sms_count > 2) ? true : false;
     	return $flag;
+    }
+    public function smsForThisMonthEndingSubscribers() {
+        $addresses = Address::where('end_month',date('m'))->where('end_year',date('Y'))->get();
+        foreach ($addresses as $key => $address) {
+            echo "Send SMS for ".$address->phone."\n";
+        }
     }
 }

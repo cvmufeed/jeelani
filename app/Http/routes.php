@@ -82,3 +82,4 @@ Route::get('/print/subscription/{subscription}','PrintController@printSubscripti
 //SMS routes
 Route::get('/sms','NotificationController@sms_index');
 Route::post('/sms','NotificationController@sms_send');
+Route::get('/sms/all','NotificationController@smsForThisMonthEndingSubscribers');
