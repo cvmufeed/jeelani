@@ -38,6 +38,6 @@ class Kernel extends ConsoleKernel
             }
             fwrite($myfile, "Completed sending all sms at....".date('Ymdhs')."\n------------------------------------\n\n");
             fclose($myfile);*/
-        })->everyMinute();
+        })->weekly();;
     }
 }

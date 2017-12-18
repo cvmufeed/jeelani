@@ -11,6 +11,7 @@ use App\Option;
 use App\Notification;
 use Illuminate\Support\Facades\Auth;
 use App\Address;
+use App\Log;
 use DateTime;
 
 class NotificationController extends Controller
@@ -84,5 +85,9 @@ class NotificationController extends Controller
     	$sms_count = Notification::where([["address_id",$address->id],["status",1],["updated_at",">",$date_start],["updated_at","<",$date_end]])->get()->count();
     	$flag = ($sms_count > 2) ? true : false;
     	return $flag;
+    }
+
+    public function sendSMSForThisMonth() {
+        $log
     }
 }
