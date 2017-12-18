@@ -34,16 +34,20 @@ class NotificationController extends Controller
     public function sms_send(Request $request) {
     	$sms = array("phone"=>$request->phone,"message"=>$request->message);
     	$sms_balance = Option::where('name','sms_balance')->get()->first();
-    	$address_id = Address::where("phone",$request->phone)->get()->first();
-    	if (($address_id == null)) {
-    		$response = json_encode(array("message"=>"Address does not exist with that phone number","type"=>"error","balance"=>$sms_balance->value));	
-    		return ($response);
-    	}
-    	// if ($this->isSMSLimitOverForThisAddress($address_id)) {
-    	// 	$response = json_encode(array("message"=>"This Address message limit exhausted","type"=>"error","balance"=>$sms_balance->value));	
-    	// 	return ($response);
-    	// }
+        $address_id = Address::where("phone",$request->phone)->get()->first();
+        if (($address_id == null)) {
+            $response = json_encode(array("message"=>"Address does not exist with that phone number","type"=>"error","balance"=>$sms_balance->value));  
+            return ($response);
+        }
+        // if ($this->isSMSLimitOverForThisAddress($address_id)) {
+        //  $response = json_encode(array("message"=>"This Address message limit exhausted","type"=>"error","balance"=>$sms_balance->value));   
+        //  return ($response);
+        // }
     	return($this->sms_processing($sms));
+    }
+
+    public function sms_address_pre_processing() {
+        
     }
 
     public function sms_processing($sms) {
@@ -88,6 +92,9 @@ class NotificationController extends Controller
     }
 
     public function sendSMSForThisMonth() {
-        $log
+        $log_count = Log::where('key', date("M").' SMS')->get()->count()
+        if ($log_count < 3) {//max 3 sms per month
+
+        }
     }
 }
