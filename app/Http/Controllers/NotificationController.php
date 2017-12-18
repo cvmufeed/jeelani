@@ -38,38 +38,43 @@ class NotificationController extends Controller
     		$response = json_encode(array("message"=>"Address does not exist with that phone number","type"=>"error","balance"=>$sms_balance->value));	
     		return ($response);
     	}
-    	if ($this->isSMSLimitOverForThisAddress($address_id)) {
-    		$response = json_encode(array("message"=>"This Address message limit exhausted","type"=>"error","balance"=>$sms_balance->value));	
-    		return ($response);
-    	}
-    	$notification = new Notification;
-    	$notification->address_id =  $address_id->id;
-    	$notification->user_id = Auth::id();
-    	$notification->content = $request->message;
-    	$notification->save();
-    	$response = json_decode($this->sms_send_now($sms));
-    	if ($response->type == "success")	{
-    		$notification->status = 1;
-    		$notification->status_message = $response->message;
-    		$response->message = "Message successfully sent to ".$sms['phone'];
-    		$notification->save();
-    		$sms_balance->value--;
-    		$sms_balance->save();
-    	}
-    	$response->balance = $sms_balance->value;
-    	$response = json_encode($response);
-		return($response);
+    	// if ($this->isSMSLimitOverForThisAddress($address_id)) {
+    	// 	$response = json_encode(array("message"=>"This Address message limit exhausted","type"=>"error","balance"=>$sms_balance->value));	
+    	// 	return ($response);
+    	// }
+    	return($this->sms_processing($sms));
+    }
+
+    public function sms_processing($sms) {
+        $notification = new Notification;
+        $notification->recipient =  $sms["phone"];
+        $notification->user_id = Auth::id();
+        $notification->content = $sms["message"];
+        $notification->save();
+        $response = json_decode($this->sms_send_now($sms));
+        $sms_balance = Option::where('name','sms_balance')->get()->first();
+        if ($response->type == "success")   {
+            $notification->status = 1;
+            $notification->status_message = $response->message;
+            $response->message = "Message successfully sent to ".$sms['phone'];
+            $notification->save();
+            $sms_balance->value--;
+            $sms_balance->save();
+        }
+        $response->balance = $sms_balance->value;
+        $response = json_encode($response);
+        return($response);
     }
     public function sms_send_now($sms){
         // $sms['phone'] = phone_number | $sms['message'] = message
-    	$api_call='http://my.msgwow.com/api/sendhttp.php?authkey=168854AElpsPjoHR598930c6&mobiles='.$sms['phone'].'&message='.urlencode($sms['message']).'&sender=JILANI&route=4&country=91&response=json';
+    	/*$api_call='http://my.msgwow.com/api/sendhttp.php?authkey=168854AElpsPjoHR598930c6&mobiles='.$sms['phone'].'&message='.urlencode($sms['message']).'&sender=JILANI&route=4&country=91&response=json';
     	$client = new Client();
     	$res = $client->request('GET', $api_call);
-		return($res->getBody());
-		/*$response = array("type"=>"success","message"=>"sadgfhauighsdu6y7isydfuiy");
+		return($res->getBody());*/
+		$response = array("type"=>"success","message"=>"The sms is succesfully sent");
 		//$response = array("type"=>"error","message"=>"The number is invalid");
-		sleep(3);
-		return json_encode($response);*/
+		// sleep(3);
+		return json_encode($response);
     }
     public function isSMSLimitOverForThisAddress(Address $address) {
 		// First day of the month.
@@ -79,11 +84,5 @@ class NotificationController extends Controller
     	$sms_count = Notification::where([["address_id",$address->id],["status",1],["updated_at",">",$date_start],["updated_at","<",$date_end]])->get()->count();
     	$flag = ($sms_count > 2) ? true : false;
     	return $flag;
-    }
-    public function smsForThisMonthEndingSubscribers() {
-        $addresses = Address::where('end_month',date('m'))->where('end_year',date('Y'))->get();
-        foreach ($addresses as $key => $address) {
-            echo "Send SMS for ".$address->phone."\n";
-        }
     }
 }
