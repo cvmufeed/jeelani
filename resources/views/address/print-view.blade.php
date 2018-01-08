@@ -87,7 +87,7 @@
             $i=0;
             foreach ($address as $value) {
                 echo '<div class="page" id="page'.$i.'"><div class="address">';
-                echo 'END '.$months[$value->end_month].'-'.$value->end_year.'<br/>';
+                // echo 'END '.$months[$value->end_month].'-'.$value->end_year.'<br/>';
                 echo $value->name.'    #'.$value->id.'<br/>';
                 echo nl2br(preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $value->address)).'<br/>';
                 if ($value->city != '') {
