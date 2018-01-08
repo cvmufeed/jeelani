@@ -92,7 +92,7 @@ class NotificationController extends Controller
     }
 
     public function sendSMSForThisMonth() {
-        $log_count = Log::where('key', date("M").' SMS')->get()->count()
+        $log_count = Log::where('key', date("M").' SMS')->get()->count();
         if ($log_count < 3) {//max 3 sms per month
 
         }
