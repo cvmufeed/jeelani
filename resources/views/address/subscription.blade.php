@@ -20,7 +20,7 @@
 		</ul>
 		<h2>Subscription ended</h2>
 		@foreach($subscriptions as $subscription)
-		@if ($subscription->end_year <= date('Y') && $subscription->end_month < date('m'))
+		@if ($subscription->end_year < date('Y') ||($subscription->end_year == date('Y') && $subscription->end_month < date('m')))
 		<li class="list-group-item">Subscriptions ending in 
 			<a href="/subscriptions/{{$subscription->end_month.$subscription->end_year}}">{{$months[$subscription->end_month]."-".$subscription->end_year}}</a>
 			<span class="badge">{{$subscription->count}}</span>
