@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
 use DateTimeZone;
+use App\Utilities\GetAddresses;
 
 class AddressController extends Controller
 {
@@ -118,32 +119,9 @@ class AddressController extends Controller
         if ($request->search == '' && $request->option != "creation_month") {
             return back()->with('error','Enter text in search box');
         }
-        switch ($request->option) {
-            case 'name_id':
-                if (is_numeric($request->search)) {
-                    $address = Address::where('id',$request->search)->get();
-                }
-                else {
-                    $address = Address::where('name','like','%'.$request->search.'%')->get();
-                }
-                break;
-            case 'pin': $address = Address::where('pin','like','%'.$request->search.'%')->get();
-            break;
-            case 'phone': $address = Address::where('phone','like','%'.$request->search.'%')->get();
-            break;
-            case 'address': $address = Address::where('address','like','%'.$request->search.'%')->get();
-            break;
-            case 'po': $address = Address::where('city','like','%'.$request->search.'%')->get();//po is stored as city in database
-            break;
-            case 'creation_month':
-            $date = new DateTime($request->start_year."-".$request->start_month."-01");
-            $date_end = new DateTime($request->start_year."-".$request->start_month."-".$date->format('t')." 23:59:59");
-            $date->setTimezone(new DateTimeZone("UTC"));
-            $date_end->setTimezone(new DateTimeZone("UTC"));
-            $address = Address::where([['created_at','>=',$date],['created_at','<=',$date_end]])->get();
-            break;
-            default:return back()->with('error','Sorry couldn\'t search. Contact Admin');
-                break; 
+        $address = GetAddresses::get_search_address($request);
+        if (isset($address['error'])) {
+            return back()->with('error',$address['message']);
         }
         $month = $this->months;
         return $this->addressTemplateView($address);

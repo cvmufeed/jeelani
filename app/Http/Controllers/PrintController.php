@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 use Dompdf\Dompdf;
+use App\Utilities\GetAddresses;
 
 class PrintController extends Controller
 {
@@ -52,6 +53,9 @@ class PrintController extends Controller
 			$year = $subscription%10000;
 	        $month = floor($subscription/10000);
 	        $address = Address::where([['end_month','=',$month],['end_year','=',$year]])->get();
+		}
+		else if (isset($request->option)) {
+			$address = GetAddresses::get_search_address($request);
 		}
 		else {
 			$address = Address::where('id','>',0)->orderBy("district_id")->get();

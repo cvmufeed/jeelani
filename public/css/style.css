@@ -8,3 +8,7 @@
 	margin-right: 5px;
     margin-top: -5px;
 }
+.js-search {
+	display: none;
+	margin-left: 10px;
+}

@@ -3,7 +3,9 @@
 
 
 <ul class="list-group">
-	<li class="list-group-item">Total <span class="badge">{{$address->count()}}</span></li>
+	<li class="list-group-item">Total 
+	<a href="" id="js-search-print-a4" class="pull-right js-search"><i class="glyphicon glyphicon-print"></i></a>
+	<span class="badge">{{$address->count()}}</span></li>
 	    @foreach ($address as $value)
 	    	<div class="list-group-item">
 	    		<sub class="pull-right">Added By: <a href="\profile\{{$value->user['id']}}">{{$value->user['name']}}</a></sub>
@@ -35,5 +37,14 @@
 
 @stop
 @section ('scripts')
+<script>
+url = window.location.href;
+index = url.search("search?");
+if (index != -1) {
+	$("#js-search-print-a4").show();
+	get_request = url.substring(index+7);
+	$("#js-search-print-a4").attr("href","print/all/a4?"+get_request);
+}
+</script>
 
 @stop
