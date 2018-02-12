@@ -50,10 +50,15 @@ class NotificationController extends Controller
         
     }
 
-    public function sms_processing($sms) {
+    public function sms_processing($sms, $user_id = NULL) {
         $notification = new Notification;
         $notification->recipient =  $sms["phone"];
-        $notification->user_id = Auth::id();
+        if (is_null($user_id)) {
+            $notification->user_id = Auth::id();
+        }
+        else {
+            $notification->user_id = $user_id;   
+        }
         $notification->content = $sms["message"];
         $notification->save();
         $response = json_decode($this->sms_send_now($sms));
@@ -72,11 +77,11 @@ class NotificationController extends Controller
     }
     public function sms_send_now($sms){
         // $sms['phone'] = phone_number | $sms['message'] = message
-    	/*$api_call='http://my.msgwow.com/api/sendhttp.php?authkey=168854AElpsPjoHR598930c6&mobiles='.$sms['phone'].'&message='.urlencode($sms['message']).'&sender=JILANI&route=4&country=91&response=json';
+    	$api_call='http://my.msgwow.com/api/sendhttp.php?authkey=168854AElpsPjoHR598930c6&mobiles='.$sms['phone'].'&message='.urlencode($sms['message']).'&sender=JILANI&route=4&country=91&response=json';
     	$client = new Client();
     	$res = $client->request('GET', $api_call);
-		return($res->getBody());*/
-		$response = array("type"=>"success","message"=>"The sms is succesfully sent");
+		return($res->getBody());
+		// $response = array("type"=>"success","message"=>"The sms is succesfully sent");
 		//$response = array("type"=>"error","message"=>"The number is invalid");
 		// sleep(3);
 		return json_encode($response);
@@ -91,10 +96,33 @@ class NotificationController extends Controller
     	return $flag;
     }
 
-    public function sendSMSForThisMonth() {
-        $log_count = Log::where('key', date("M").' SMS')->get()->count();
-        if ($log_count < 3) {//max 3 sms per month
+    public function sendSMSForThisMonth($max_retry = 3) {
+        $log_count = Log::where([['key', date('Ym').' SMS'],['value','success']])->get()->count();
+        $log = "";
+        if ($log_count < $max_retry) {//max 3 sms per month
+            $addresses = Address::where([["end_month",date('m')],["end_year",date('Y')]])->get();
+            foreach ($addresses as $address) {
+                if (strlen($address->phone) == 10) {
+                    $sms_template = Option::where('name','sms_template')->first()->string_value;
+                    $sms = array("phone"=>$address->phone,"message"=>$sms_template);
+                    $response = json_decode($this->sms_processing($sms, 1));
+                    $log .= $address->id.",".$address->phone.",".$response->message."\n";
 
+                }
+                else {
+                    $log .= $address->id.",".$address->phone.",Error: digits not equal to 10\n";
+                }
+            }
+            $db_log = new Log();
+            $db_log->key = date('Ym').' SMS';
+            $db_log->value = "success";
+            $db_log->log = $log;
+            $db_log->save();
+            $response = array("status" => "success","message"=>"successfully run the sms for ".date('M')." month");
         }
+        else {
+            $response = array("status" => "failed","message"=>"Already ".$max_retry." sms send for this month");
+        }
+        return $response;
     }
 }
