@@ -84,14 +84,17 @@ class PrintController extends Controller
 	}
 	public function passPrintToView($address,$page_size = "") {
 		$options = Option::all();
-		$address = $address->reject(function ($item) { 
-			$collection_year_month = $item->end_year*100+$item->end_month;
-			$reject_year_month=date('Y')*100+date('m'); 
-			if ($collection_year_month < $reject_year_month) 
-			{
-				return $item;
-			} 
-		});
+		if ($page_size != 'A4') {
+			//reject ended subscriptions
+			$address = $address->reject(function ($item) { 
+				$collection_year_month = $item->end_year*100+$item->end_month;
+				$reject_year_month=date('Y')*100+date('m'); 
+				if ($collection_year_month < $reject_year_month) 
+				{
+					return $item;
+				} 
+			});
+		}
 		if ($page_size == "") {
 			return view('address.print-view',compact('address','options'));
 		}
